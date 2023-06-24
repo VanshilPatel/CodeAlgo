@@ -1,0 +1,47 @@
+.right-container{
+    background-color: #ffffff1a;
+    border: 2px solid black;
+    width: 50%;
+    height: 53rem;
+    border-radius: 8px;
+}
+
+.btn-container{
+    margin-left: 31rem;
+   
+    margin-top: 19px;
+
+}
+
+.submit-btn{
+    margin-top: 3px;
+    padding: 5px;
+    margin-left: 7px;
+    border: 1px solid #4CC575;
+    border-radius: 3px;
+    background-color: #4CC575;
+    color: white;
+    text-decoration: none;
+}
+
+.run-btn{
+    margin-right: 7px;
+    border: 1px solid #ffffff1a;
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+
+.text-box { 
+    background-color: #ffffff1a;
+    height: 35rem;
+    width: 100%;
+    padding-left: 5px;
+    
+   
+}
+.text-box[type="text"]{
+    color: white;
+}

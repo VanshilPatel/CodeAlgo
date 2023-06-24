@@ -1,0 +1,35 @@
+.nav-main-div{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem 0;
+    background-color: rgb(40, 40, 40);
+    min-width: 900px;
+}
+
+.nav-left , .nav-right{
+    display: flex;
+    background-color: rgb(40, 40, 40);
+}
+
+.nav-left button{
+    margin: 1rem 10vw 1rem 0;
+}
+
+.nav-right button{
+    margin: 1rem 0 1rem 3rem;
+}
+
+.nav-btn{
+    color: rgb(255, 161, 22);
+    width: 6rem;
+    height: 3rem;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #ffffff1a;
+    border: 0;
+    font-size: 1rem;
+}
+
+.nav-btn:hover{
+    background-color: #ffffff24;
+}
