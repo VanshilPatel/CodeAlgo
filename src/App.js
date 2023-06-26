@@ -1,28 +1,39 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./Components/HomePage";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import "./Styles/App.css";
 import Submissions from "./Components/Submissions";
+import Main from "./Components/Main";
 
 
-const appRouter = createBrowserRouter([
-    {
+// const appRouter = createBrowserRouter([
+//     {
 
-        path: "/",
-        element: <Home />,
-    },
-    {
-        path : "/submissions",
-        element : <Submissions/>
-      },
-])
+//         path: "/",
+//         element: <Home />,
+//     },
+//     {
+//         path : "/submissions",
+//         element : <Submissions/>
+//       },
+// ])
+
+
 
 const App = () => {
     return (
-        <div>
-            <RouterProvider router={appRouter} />
-        </div>
+        // <div>
+        //     <RouterProvider router={appRouter} />
+        // </div>
+        <Router>
+      <Routes>
+        
+         <Route path="/" element={<Main />} />
+       
+         <Route path="/submissions/:id" element={<Submissions />} />
+
+      </Routes>
+    </Router>
     )
 };
 

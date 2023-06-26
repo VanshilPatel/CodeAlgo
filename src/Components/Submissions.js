@@ -4,7 +4,9 @@ import RightContainer from "./RightContainer";
 import Navbar from "./Navbar";
 import "../Styles/Submissions.css";
 
+
 const Submissions = () => {
+
   return (
     <div>
       <Navbar />

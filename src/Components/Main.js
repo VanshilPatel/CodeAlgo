@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
+
 
 import "../Styles/Main.css";
 
@@ -44,9 +46,12 @@ function Main() {
                             <div className="tbl-clm">
                                 {
                                     Data.slice(page * 10 - 10, page * 10).map((Data) => {
-                                        return <p key={Data.id} className={Data.id % 2 === 0 ? "dark" : "light"}>
+                                        /* return <p key={Data.id} className={Data.id % 2 === 0 ? "dark" : "light"}>
                                             {Data.id}.{Data.title}
-                                        </p>
+                                        </p> */
+                                        return (
+                                        <Link className={Data.id % 2 === 0 ? "dark" : "light"} to={`/submissions/${Data.id}`}>{Data.id}.{Data.title}</Link>
+                                        )
                                     })
                                 }
                             </div>
@@ -82,7 +87,7 @@ function Main() {
 
                 <div className="main-div-right">
                     <div className="rht-streak">
-                        <p>Current Streak:1🔥</p>
+                        <p>Current Streak:1 🔥</p>
 
                     </div>
                     <div className="rht-crc">
