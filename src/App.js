@@ -3,6 +3,9 @@ import Submissions from "./components/Submissions";
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Navbar from './components/Navbar';
+import Premium from './components/Premium';
+import PriceCard from './components/PriceCard';
+import Info from './components/Info';
 
 
 
@@ -24,7 +27,7 @@ const App = () => {
       <Router>
     <Routes>
       
-       <Route path="/" element={<Submissions />} />
+       <Route path="/" element={<Premium />} />
      
        <Route path="/submissions/:id" element={<Submissions />} />
 
