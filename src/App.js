@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Submissions from "./components/Submissions";
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import Navbar from './components/Navbar';
 
 
 
@@ -23,7 +24,7 @@ const App = () => {
       <Router>
     <Routes>
       
-       <Route path="/" element={<SignUp />} />
+       <Route path="/" element={<Submissions />} />
      
        <Route path="/submissions/:id" element={<Submissions />} />
 

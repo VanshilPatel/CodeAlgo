@@ -7,13 +7,16 @@ import { useState } from "react";
 
 import RightContainer from "./RightContainer";
 import LeftContainer from "./LeftContainer";
+import Navbar from "./Navbar";
 
 const Submissions = () => {
     
     const [language, setLanguage] = useState("C++");
     
   return (
-    <Flex height="100vh"  marginTop={20} padding={0}>
+    <>
+    <Navbar/>
+    <Flex height="100vh"  marginTop={2} padding={0}>
       <Box
         width="50%"
         height="100%"
@@ -48,6 +51,7 @@ const Submissions = () => {
         <RightContainer/>
       </Box>
     </Flex>
+    </>
   );
 };
 
