@@ -1,8 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Submissions from "./components/Submissions";
+import { BrowserRouter as Router, Routes, Route, Redirect } from 'react-router-dom';
+import Problem from "./components/Problem";
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import Navbar from './components/Navbar';
+import Home from './components/Home/Home';
 
 
 
@@ -10,27 +11,28 @@ import Navbar from './components/Navbar';
 //   return (
 //     <div>
 //      <Submissions/>
-   
+
 //     </div>
 //   );
 // }
 const App = () => {
   return (
-      // <div>
-      //     <RouterProvider router={appRouter} />
-      // </div>
-      <>
-      
-      <Router>
-    <Routes>
-      
-       <Route path="/" element={<Submissions />} />
-     
-       <Route path="/submissions/:id" element={<Submissions />} />
+    // <div>
+    //     <RouterProvider router={appRouter} />
+    // </div>
+    <>
 
-    </Routes>
-  </Router>
-  </>
+      <Router>
+        <Navbar />
+        <Routes>
+
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/problem/:id" element={<Problem />} />
+        </Routes>
+      </Router>
+    </>
   )
 };
 
