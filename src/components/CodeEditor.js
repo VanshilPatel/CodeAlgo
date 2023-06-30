@@ -8,6 +8,7 @@ const CodeEditor = () => {
     <>
       <Textarea  height="92.9%"  onChange={(e) => setCode(e.target.value)}
       placeholder="Your code"></Textarea>
+     
     </>
   )
 }
