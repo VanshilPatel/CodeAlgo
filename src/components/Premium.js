@@ -7,7 +7,7 @@ import Info from './Info'
 const Premium = () => {
   return (
     <>
-      <Navbar/>
+      
       <Box textAlign={'center'}>
         <Heading as="h1" fontSize="7xl" mt={'32'}>Premium</Heading>
         <Text fontSize="lg" fontWeight={600} mt={3} color={'gray.500'}>

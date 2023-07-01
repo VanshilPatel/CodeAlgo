@@ -30,18 +30,18 @@ const Navbar = () => {
     
       return (
         <>
-          <Box bg={useColorModeValue('gray.100', 'gray.900')} px={10}>
+          <Box bg={useColorModeValue('gray.100', 'gray.900')} px={10} boxShadow={'md'}>
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
               
               <HStack spacing={'36'} alignItems={'center'}>
-                <Box>Logo</Box>
+                <Box fontWeight={'semibold'}>Logo</Box>
                 <HStack
                   as={'nav'}
                   spacing={'14'}
                   display={{ base: 'none', md: 'flex' }}>
-                  {Links.map((link) => (
-                    <NavLink key={link}>{link}</NavLink>
-                  ))}
+                   <NavLink to={"/problems"}>Problems</NavLink>
+                   <NavLink to={"/"}>Discuss</NavLink>
+                   <NavLink color='yellow' to={"/premium"}>Premium</NavLink>
                 </HStack>
                 <HStack
           flex={{ base: 1, md: 0 }}
@@ -56,7 +56,7 @@ const Navbar = () => {
             fontWeight={600}
             color={'white'}
             bg={'green.500'}
-            href={'#'}
+            href={'/signup'}
             _hover={{
               bg: 'green.300',
             }}>
@@ -70,7 +70,7 @@ const Navbar = () => {
             fontWeight={600}
             color={'white'}
             bg={'blue.600'}
-            href={'#'}
+            href={'/login'}
             _hover={{
               bg: 'blue.400',
             }}>
