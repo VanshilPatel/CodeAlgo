@@ -5,11 +5,10 @@ import CodeEditor from "./CodeEditor";
 
 const RightContainer = () => {
   return (
-    
+
     <>
-    
-       <CodeEditor/>
-       <Buttons/>
+      <CodeEditor />
+      <Buttons />
     </>
   )
 }

@@ -21,16 +21,12 @@ import Problem from './components/Problem'
 //   );
 // }
 const App = () => {
-  return (
-      // <div>
-      //     <RouterProvider router={appRouter} />
-      // </div>
-      <>
-      
+  return ( 
+    <>
       <Router>
-      <Navbar />
-      <Routes>
-          <Route path="/problems" element={<Home />} />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/problem/:id" element={<Problem />} />

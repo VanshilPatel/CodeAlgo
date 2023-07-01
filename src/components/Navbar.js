@@ -1,31 +1,28 @@
-import React,{ ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom';
 
 
-    import {
-      Box,
-      Flex,
-      Avatar,
-      HStack,
-      Link,
-      
-      IconButton,
-      Button,
-      Menu,
-      MenuButton,
-      MenuList,
-      MenuItem,
-      MenuDivider,
-      useDisclosure,
-      useColorModeValue,
-      Stack,
-    } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Avatar,
+  HStack,
+  Link,
+
+  IconButton,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
+} from '@chakra-ui/react';
 
 
 const Navbar = () => {
-    
-    
-    const Links = ['Problems', 'Discuss', 'Premium'];
 
     
       return (
