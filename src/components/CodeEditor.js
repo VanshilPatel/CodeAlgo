@@ -1,15 +1,21 @@
-import React,{useState} from 'react'
-import {  Textarea } from "@chakra-ui/react";
+import React, { useState, useEffect } from 'react';
+import { Textarea } from "@chakra-ui/react";
 
+const CodeEditor = (props) => {
+  const [code, setCode] = useState(props.lg);
 
-const CodeEditor = () => {
-    const [code, setCode] = useState();
+  useEffect(() => {
+    setCode(props.lg);
+  }, [props.lg]);
+
   return (
-    <>
-      <Textarea  height="92.9%"  onChange={(e) => setCode(e.target.value)}
-      placeholder="Your code"></Textarea>
-    </>
-  )
-}
+    <Textarea
+      height="92.9%"
+      value={code}
+      onChange={(e) => setCode(e.target.value)}
+      placeholder="Your code"
+    />
+  );
+};
 
-export default CodeEditor
+export default CodeEditor;
