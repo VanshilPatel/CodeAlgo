@@ -3,10 +3,10 @@ import {  Textarea } from "@chakra-ui/react";
 
 
 const CodeEditor = () => {
-    const [code, setCode] = useState();
+    const [submission, setSubmission] = useState();
   return (
     <>
-      <Textarea  height="92.9%"  onChange={(e) => setCode(e.target.value)}
+      <Textarea  height="92.9%"   onChange={(e) => setSubmission(e.target.value)}
       placeholder="Your code"></Textarea>
      
     </>
