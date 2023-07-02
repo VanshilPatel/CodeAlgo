@@ -1,13 +1,24 @@
-import { BrowserRouter as Router, Routes, Route, Redirect } from 'react-router-dom';
-import Problem from "./components/Problem";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-import Navbar from './components/Navbar';
-import Home from './components/Home/Home';
-import Premium from './components/Premium';
-import PriceCard from './components/PriceCard';
-import Info from './components/Info';
 
+import Premium from './components/Premium';
+import Navbar from './components/Navbar';
+import Home from './components/Home/Home'
+import Problem from './components/Problem'
+
+
+<script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
+
+
+// function App() {
+//   return (
+//     <div>
+//      <Submissions/>
+
+//     </div>
+//   );
+// }
 const App = () => {
   return (
     <>

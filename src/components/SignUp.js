@@ -19,6 +19,8 @@ import {
   
 const SignUp = ()=>{
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
   
     return (
       <Flex
@@ -57,14 +59,15 @@ const SignUp = ()=>{
               </HStack>
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" />
+                <Input  onChange={(e)=>setEmail(e.target.value)} type="email" />
               </FormControl>
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
-                  <Input type={showPassword ? 'text' : 'password'} />
+                  <Input onChange={(e)=>setPassword(e.target.value)} type={showPassword ? 'text' : 'password'} />
                   <InputRightElement h={'full'}>
                     <Button
+                      
                       variant={'ghost'}
                       onClick={() =>
                         setShowPassword((showPassword) => !showPassword)
@@ -82,15 +85,24 @@ const SignUp = ()=>{
                   color={'white'}
                   _hover={{
                     bg: 'blue.500',
-                  }}>
+                  }}
+                  onClick={async (e) => {
+            const response = await fetch(`http://localhost:3000/signup`, {
+              method: "POST",
+              body: JSON.stringify({
+                email: email,
+                password: password,
+              }),
+            });
+
+            const json = await response.json();
+            console.log(json);
+          }}
+                  >
                   Sign up
                 </Button>
               </Stack>
-              {/* <Stack pt={6}>
-                <Text align={'center'}>
-                  Already a user? <Link color={'blue.400'}>Login</Link>
-                </Text>
-              </Stack> */}
+             
             </Stack>
           </Box>
         </Stack>
