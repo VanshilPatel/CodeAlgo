@@ -1,144 +1,3 @@
-// import express from "express";
-// const app = express();
-// const port = 3000;
-// import { sign } from "jsonwebtoken";
-// import { auth } from "./middleware.js";
-// let USER_ID_COUNTER = 1;
-// const USERS = [];
-// const JWT_SECRET = "secret";
-// import { json, urlencoded } from "body-parser";
-// var jsonParser = json();
-// var urlencodedParser = urlencoded({ extended: false });
-// const SUBMISSIONS = [];
-// import cors from "cors";
-// app.use(jsonParser);
-// app.use(cors);
-
-// 
-// app.get("/", (req, res) => {
-//   res.json({
-//     message: "Hello World",
-//   });
-// });
-
-// app.get("/me", auth, (req, res) => {
-//   const user = USERS.find((x) => x.id == req.userId);
-//   res.json({
-//     user,
-//   });
-// });
-
-// app.post("/signup", (req, res) => {
-//   const email = req.body.email;
-//   const password = req.body.password;
-
-//   if (USERS.find((x) => x.email == email)) {
-//     return res.status(403).json("Email already exists");
-//   }
-
-//   USERS.push({
-//     email,
-//     password,
-//     id: USER_ID_COUNTER++,
-//   });
-//   return res.json({
-//     msg: "Success",
-//   });
-// });
-
-// app.post("/login", (req, res) => {
-//   const email = req.body.email;
-//   const password = req.body.password;
-//   const user = USERS.find((x) => x.email == email);
-
-//   if (!user) {
-//     return res.status(403).json({ msg: "User not found" });
-//   }
-
-//   if (user.password != password) {
-//     return res.status(403).json({ msg: "Incorrect Password" });
-//   }
-
-//   const token = sign(
-//     {
-//       id: user.id,
-//     },
-//     JWT_SECRET
-//   );
-
-//   return res.json({ token });
-// });
-
-// app.get("/problems", (req, res) => {
-//   const filteredProblems = PROBLEMS.map((x) => ({
-//     id: x.id,
-//     title: x.title,
-//     acceptance: x.acceptance,
-//     difficulty: x.difficulty,
-//   }));
-
-//   res.json({
-//     problems: filteredProblems,
-//   });
-// });
-
-// app.get("/problems:id", (req, res) => {
-//   const id = req.params.id;
-//   const problem = PROBLEMS.find((x) => x.id == id);
-//   if (!problem) {
-//     return res.status(411).json({});
-//   }
-//   res.json({
-//     problem,
-//   });
-// });
-
-// app.post("/submission", auth, (req, res) => {
-//   const isCorrect = Math.random() < 0.5;
-//   const id = req.body.id;
-//   const submission = req.body.submission;
-//   // send id as string and not integer
-
-//   if (isCorrect) {
-//     SUBMISSIONS.push({
-//       submission,
-//       id,
-//       userId: req.userId,
-//       status: "Accepted",
-//     });
-
-//     return res.json({
-//       status: "Accepted",
-//     });
-//   } else {
-//     SUBMISSIONS.push({
-//       submission,
-//       id,
-//       userId: req.userId,
-//       status: "Wrong Answer",
-//     });
-//     return res.json({
-//       status: "Wrong Answer",
-//     });
-//   }
-// });
-
-// app.get("/submissions/problems:id", (req, res) => {
-//   const id = req.params.id;
-//   const submissions = SUBMISSIONS.filter(
-//     (x) => x.id == id && x.userId == req.userId
-//   );
-//   res.json({
-//     submissions,
-//   });
-// });
-
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`);
-// });
-
-
-
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -318,9 +177,6 @@ const PROBLEMS = [
   },
 ]
 
-
-
-
 const SUBMISSIONS = [];
 
 app.get("/", (req, res) => {
@@ -332,6 +188,7 @@ app.get("/", (req, res) => {
 app.get("/problems", (req, res) => {
   const filteredProblems = PROBLEMS.map((x) => ({
     id: x.id,
+    status: x.status,
     difficulty: x.difficulty,
     acceptance: x.acceptance,
     title: x.title,
