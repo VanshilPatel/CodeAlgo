@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3000;
+const mongoose = require('mongoose');
 var jwt = require("jsonwebtoken");
 const { auth } = require("./middleware");
 let USER_ID_COUNTER = 1;
@@ -12,6 +13,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const cors = require("cors");
 app.use(cors());
 app.use(jsonParser);
+const User = require('./userschema');
+const Problem = require('./problemschema');
 
 
 const PROBLEMS = [
@@ -185,18 +188,28 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/problems", (req, res) => {
-  const filteredProblems = PROBLEMS.map((x) => ({
-    id: x.id,
-    status: x.status,
-    difficulty: x.difficulty,
-    acceptance: x.acceptance,
-    title: x.title,
-  }));
+app.get("/problems", async (req, res) => {
 
-  res.json({
-    problems: filteredProblems,
-  });
+  let problems;
+
+  try {
+    problems = await Problem.find({});
+  } catch (err) {
+    res.status(500).json({ msg: "Fetching problems failed, please try again later." })
+  }
+  res.json({ problems: problems.map(problem => problem.toObject({ getters: true })) });
+
+  // const filteredProblems = PROBLEMS.map((x) => ({
+  //   id: x.id,
+  //   status: x.status,
+  //   difficulty: x.difficulty,
+  //   acceptance: x.acceptance,
+  //   title: x.title,
+  // }));
+
+  // res.json({
+  //   problems: filteredProblems,
+  // });
 });
 
 app.get("/problem/:id", (req, res) => {
@@ -228,6 +241,29 @@ app.get("/submissions/:problemId", auth, (req, res) => {
   });
 });
 
+// app.get("/probdb", async (req, res) => {
+//   try {
+//     for (const p of PROBLEMS) {
+//       const createdProblem = new Problem({
+//         id: p.id,
+//         description: p.description,
+//         status: p.status,
+//         title: p.title,
+//         acceptance: p.acceptance,
+//         difficulty: p.difficulty
+//       });
+
+//       await createdProblem.save();
+//     }
+
+//     res.status(200).json({ msg: "Problems inserted successfully" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ msg: "Failed to insert problems" });
+//   }
+// });
+
+
 app.post("/submission", auth, (req, res) => {
   const isCorrect = Math.random() < 0.5;
   const id = req.body.id;
@@ -256,46 +292,97 @@ app.post("/submission", auth, (req, res) => {
   }
 });
 
-app.post("/signup", (req, res) => {
+app.post("/signup", async (req, res) => {
+  const { email, password } = req.body;
+
+  // if (!email || !password) {
+  //   return res.status(400).json({ msg: "Email and password are required" });
+  // }
+
+  try {
+    let existingUser = await User.findOne({ email: email });
+
+    if (existingUser) {
+      return res.status(422).json({ msg: "User exists already, please login instead" });
+    }
+
+    const createdUser = new User({
+      email,
+      password
+    });
+
+    await createdUser.save();
+
+    res.status(201).json({ email: createdUser.email });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Signing up failed, please try again" });
+  }
+});
+
+
+// if (USERS.find((x) => x.email === email)) {
+//   return res.status(403).json({ msg: "Email already exists" });
+// }
+
+// USERS.push({
+//   email,
+//   password,
+//   id: USER_ID_COUNTER++,
+// });
+// return res.json({
+//   msg: "Success",
+// });
+
+
+app.post("/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  if (USERS.find((x) => x.email === email)) {
-    return res.status(403).json({ msg: "Email already exists" });
-  }
 
-  USERS.push({
-    email,
-    password,
-    id: USER_ID_COUNTER++,
+  try {
+    const existingUser = await User.findOne({ email: email });
+
+    if (!existingUser) {
+      return res.status(403).json({ msg: "Invalid credentials, could not login." });
+    }
+
+    if (existingUser.password === password) {
+      // If the passwords match, you can proceed with further actions like generating a token
+      // const token = jwt.sign(
+      //   {
+      //     id: existingUser.id,
+      //   },
+      //   JWT_SECRET
+      // );
+
+      return res.status(200).json({ msg: "Logged In Successfully" });
+    } else {
+      return res.status(403).json({ msg: "Invalid credentials, could not login." });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ msg: "Logging in failed, please try again later." });
+  }
+});
+
+// const user = USERS.find((x) => x.email === email);
+
+// if (!user) {
+//   return res.status(403).json({ msg: "User not found" });
+// }
+
+// if (user.password !== password) {
+//   return res.status(403).json({ msg: "Incorrect password" });
+// }
+
+
+mongoose
+  .connect('mongodb+srv://j966433:DkW0PAAMdDgARo13@users.lp1sjwp.mongodb.net/user?retryWrites=true&w=majority')
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  })
+  .catch(err => {
+    console.log(err);
   });
-  return res.json({
-    msg: "Success",
-  });
-});
-
-app.post("/login", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const user = USERS.find((x) => x.email === email);
-
-  if (!user) {
-    return res.status(403).json({ msg: "User not found" });
-  }
-
-  if (user.password !== password) {
-    return res.status(403).json({ msg: "Incorrect password" });
-  }
-
-  const token = jwt.sign(
-    {
-      id: user.id,
-    },
-    JWT_SECRET
-  );
-
-  return res.json({ token });
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
