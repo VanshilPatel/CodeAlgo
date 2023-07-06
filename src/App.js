@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Submissions from "./components/Problem";
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 
@@ -16,12 +15,12 @@ import Problem from './components/Problem'
 //   return (
 //     <div>
 //      <Submissions/>
-   
+
 //     </div>
 //   );
 // }
 const App = () => {
-  return ( 
+  return (
     <>
       <Router>
         <Navbar />
@@ -32,9 +31,8 @@ const App = () => {
           <Route path="/problem/:id" element={<Problem />} />
           <Route path="/premium" element={<Premium />} />
         </Routes>
-  </Router>
-  </>
+      </Router>
+    </>
   )
 };
-
 export default App;
