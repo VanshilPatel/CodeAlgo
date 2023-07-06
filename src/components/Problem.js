@@ -61,39 +61,37 @@ const Submissions = () => {
     },
     {
       "id": "3",
-      "code": `class Solution {
-        public:
-            vector<int> twoSum(vector<int>& nums, int target) {
-
-            }
-        };`
+      "code": `class Solution(object):
+      def twoSum(self, nums, target):
+          """
+          :type nums: List[int]
+          :type target: int
+          :rtype: List[int]
+          """`
     },
     {
       "id": "4",
       "code": `class Solution {
-        public:
-            vector<int> twoSum(vector<int>& nums, int target) {
-
-            }
-        };`
+        public int[] twoSum(int[] nums, int target) {
+            
+        }
+    }`
     },
     {
       "id": "5",
-      "code": `class Solution {
-        public:
-            vector<int> twoSum(vector<int>& nums, int target) {
-
-            }
-        };`
+      "code": `public class Solution {
+        public int[] TwoSum(int[] nums, int target) {
+            
+        }
+    }`
     },
     {
       "id": "6",
       "code": `class Solution {
-        public:
-            vector<int> twoSum(vector<int>& nums, int target) {
-
-            }
-        };`
+        func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+            
+        }
+    }`
     },
   ]
 
