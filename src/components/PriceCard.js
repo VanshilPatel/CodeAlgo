@@ -1,18 +1,14 @@
 
-import React , { ReactNode } from 'react'
+import React  from 'react'
 
 import {
     Flex,
-  Box,
-  Stack,
+ 
   HStack,
   Heading,
   Text,
   VStack,
-  useColorModeValue,
-  List,
-  ListItem,
-  ListIcon,
+  
   Button,
 } from '@chakra-ui/react';
 

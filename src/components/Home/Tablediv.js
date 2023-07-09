@@ -23,7 +23,7 @@ import {
 
 import Tick from "./tick.svg";
 import Data from "../../utils/data.json";
-import { ChevronDownIcon, RepeatIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, RepeatIcon, ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons';
 
 function Tablediv() {
   const [problems, setProblems] = useState([]);
@@ -165,13 +165,13 @@ function Tablediv() {
               </MenuList>
             </Menu>
             <HStack>
-              <Button onClick={() => selectPageHandler(page - 1)}>B</Button>
+              <Button onClick={() => selectPageHandler(page - 1)}><ArrowBackIcon/></Button>
               {
                 [...Array(Math.ceil(problems.length / perPage))].map((_, i) => {
                   return <Button backgroundColor={page === i + 1 ? "whiteAlpha.400" : ""} onClick={() => selectPageHandler(i + 1)}>{i + 1}</Button>
                 })
               }
-              <Button onClick={() => selectPageHandler(page + 1)}>F</Button>
+              <Button onClick={() => selectPageHandler(page + 1)}><ArrowForwardIcon/></Button>
             </HStack>
           </HStack>
         </VStack>

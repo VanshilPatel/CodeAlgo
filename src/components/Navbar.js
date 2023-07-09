@@ -1,25 +1,19 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom';
 
 
 import {
   Box,
   Flex,
-  Avatar,
+  
   HStack,
-  Link,
-
-  IconButton,
+  
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useDisclosure,
-  useColorModeValue,
-  Stack,
+  
+  useColorModeValue
+  
 } from '@chakra-ui/react';
+
 
 
 const Navbar = () => {
@@ -31,13 +25,13 @@ const Navbar = () => {
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
 
           <HStack spacing={'36'} alignItems={'center'}>
-            <Box fontWeight={'semibold'}>Logo</Box>
+            <Box fontWeight={'semibold'}> <NavLink to={"/"}> Logo</NavLink></Box>
             <HStack
               as={'nav'}
               spacing={'14'}
               display={{ base: 'none', md: 'flex' }}>
-              <NavLink to={"/problems"}>Problems</NavLink>
-              <NavLink to={"/"}>Discuss</NavLink>
+              <NavLink to={"/"}>Problems</NavLink>
+              <NavLink to={"/discuss"}>Discuss</NavLink>
               <NavLink color='yellow' to={"/premium"}>Premium</NavLink>
             </HStack>
             <HStack
