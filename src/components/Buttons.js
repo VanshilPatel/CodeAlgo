@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import {
   Button,
   Flex,
@@ -11,6 +12,8 @@ import {
 
 const Buttons = () => {
   const [showModal, setShowModal] = useState(false);
+  const pid  = useParams().id;
+  const [submit , setSubmit ] = useState(false);
   
   // const [submit , setSubmit] = useState(false);
   // const submitClick = () =>{
@@ -22,6 +25,7 @@ const Buttons = () => {
 
   const handleClick = () => {
     setShowModal(true);
+    setSubmit(true)
 
     
     setTimeout(() => {
@@ -72,22 +76,22 @@ const Buttons = () => {
         </Modal>
         {showModal && <div className="backdrop"></div>}
         <Button colorScheme="green" size="md" ml={5}  
-        // onClick={async () => {
-        //           const response = await fetch(`http://localhost:3000/submission`, {
-        //             method: "POST",
-        //             headers: {
-        //               "authorization": localStorage.getItem("token")
-        //             },
-        //             body: JSON.stringify({
-        //               problemId: pid,
-        //               submission: submission
-        //             })
-        //           });
+        onClick={async () => {
+                  const response = await fetch(`http://localhost:3000/submission`, {
+                    method: "POST",
+                    headers: {
+                      "authorization": localStorage.getItem("token")
+                    },
+                    body: JSON.stringify({
+                      problemId: pid,
+                      //useremail : email
+                    })
+                  });
 
-        //           const json = await response.json();
-        //           console.log(json);
+                  const json = await response.json();
+                  console.log(json);
 
-        //         }}
+                }}
                 >
           Submit
         </Button>

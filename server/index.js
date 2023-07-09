@@ -265,11 +265,11 @@ app.get("/submissions/:problemId", auth, (req, res) => {
 app.post("/submission", auth, (req, res) => {
   const isCorrect = Math.random() < 0.5;
   const id = req.body.id;
-  const submission = req.body.submission;
+ 
 
   if (isCorrect) {
     SUBMISSIONS.push({
-      submission,
+      //find user based on email .
       id,
       userId: req.userId,
       status: "AC",
@@ -279,7 +279,7 @@ app.post("/submission", auth, (req, res) => {
     });
   } else {
     SUBMISSIONS.push({
-      submission,
+     
       id,
       userId: req.userId,
       status: "WA",
@@ -292,6 +292,7 @@ app.post("/submission", auth, (req, res) => {
 
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
+  
 
   
 
@@ -305,6 +306,7 @@ app.post("/signup", async (req, res) => {
     }
 
     const createdUser = new User({
+
       email,
       password,
     });
@@ -329,7 +331,7 @@ app.post("/login", async (req, res) => {
     if (!existingUser) {
       return res
         .status(403)
-        .json({ msg: "Invalid credentials, could not login." });
+        .json({ msg: false });
     }
 
     if (existingUser.password === password) {
@@ -341,11 +343,11 @@ app.post("/login", async (req, res) => {
         JWT_SECRET
       );
 
-      return res.status(200).json({ msg: "Logged In Successfully" });
+      return res.status(200).json({ msg: true });
     } else {
       return res
         .status(403)
-        .json({ msg: "Invalid credentials, could not login." });
+        .json({ msg: false });
     }
   } catch (err) {
     console.error(err);

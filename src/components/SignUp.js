@@ -16,11 +16,14 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom';
+
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   return (
     <Flex
@@ -100,6 +103,8 @@ const SignUp = () => {
 
                   const json = await response.json();
                   console.log(json);
+
+                  navigate('/login');
                 }}
               >
                 Sign up
@@ -109,6 +114,7 @@ const SignUp = () => {
           </Stack>
         </Box>
       </Stack>
+      
     </Flex>
   );
 }
