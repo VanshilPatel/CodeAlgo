@@ -9,11 +9,17 @@ import {
   ModalContent,
   ModalBody,
 } from "@chakra-ui/react";
+import { useNavigate } from 'react-router-dom';
+
+
+
 
 const Buttons = () => {
   const [showModal, setShowModal] = useState(false);
   const pid  = useParams().id;
-  const [submit , setSubmit ] = useState(false);
+  // const [submit , setSubmit ] = useState(false);
+  const navigate = useNavigate();
+  const [status, setStatus] = useState('');
   
   // const [submit , setSubmit] = useState(false);
   // const submitClick = () =>{
@@ -22,11 +28,11 @@ const Buttons = () => {
   
 
 
-
+ // for run button
   const handleClick = () => {
     setShowModal(true);
-    setSubmit(true)
-
+    // setSubmit(true)
+    
     
     setTimeout(() => {
       setShowModal(false);
@@ -90,11 +96,25 @@ const Buttons = () => {
 
                   const json = await response.json();
                   console.log(json);
-
+                
+                  navigate('/submission');
+                  setStatus(json.status);
                 }}
                 >
           Submit
         </Button>
+        {/* {status === 'AC' ? <p>Accepted</p> : status === 'WA' ? <p>Rejected</p> : null} */}
+        {status === 'AC' ? (
+        <div className="status-container accepted">
+          <div className="symbol">&#x2713;</div>
+          <p className="status-text">Accepted</p>
+        </div>
+      ) : status === 'WA' ? (
+        <div className="status-container rejected">
+          <div className="symbol">&#x2717;</div>
+          <p className="status-text">Rejected</p>
+        </div>
+      ) : null}
       </Flex>
     </div>
   );

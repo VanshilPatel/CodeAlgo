@@ -7,6 +7,8 @@ import Navbar from './components/Navbar';
 import Home from './components/Home/Home'
 import Problem from './components/Problem'
 import Discuss from './components/Discuss'
+import Submissions from './components/Problem';
+
 
 
 <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript"></script>
@@ -26,11 +28,13 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/home" element={<Home />} />
+          {/* <Route path="/signup" element={<SignUp />} /> */}
           <Route path="/discuss" element={<Discuss />} />
           <Route path="/problem/:id" element={<Problem />} />
+          
           <Route path="/premium" element={<Premium />} />
         </Routes>
       </Router>

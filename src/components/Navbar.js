@@ -34,7 +34,7 @@ const Navbar = () => {
               spacing={"14"}
               display={{ base: "none", md: "flex" }}
             >
-              <NavLink to={"/"}>Problems</NavLink>
+              <NavLink to={"/home"}>Problems</NavLink>
               <NavLink to={"/discuss"}>Discuss</NavLink>
               <NavLink color="yellow" to={"/premium"}>
                 Premium

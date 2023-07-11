@@ -136,7 +136,7 @@ const Login = () => {
       if (json.msg) {
         // Redirect to the desired route after successful login
         
-        navigate('/');
+        navigate('/home');
        
        
       }
