@@ -1,12 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 3000;
 const mongoose = require("mongoose");
 var jwt = require("jsonwebtoken");
 const { auth } = require("./middleware");
-let USER_ID_COUNTER = 1;
-const USERS = [];
-const JWT_SECRET = "secret";
+// let USER_ID_COUNTER = 1;
+// const USERS = [];
+
 const bodyParser = require("body-parser");
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -220,19 +221,14 @@ app.get("/problems", async (req, res) => {
   res.json({
     problems: problems.map((problem) => problem.toObject({ getters: true })),
   });
-
-  
 });
 
 app.get("/problem/:id", async (req, res) => {
   const id = req.params.id;
 
-
- 
-
   try {
-    // const problem = await Problem.findById(id); 
-    const problem = await Problem.findOne({ id: id }); 
+    // const problem = await Problem.findById(id);
+    const problem = await Problem.findOne({ id: id });
     if (!problem) {
       return res.status(404).json({ error: "Problem not found" });
     }
@@ -244,12 +240,6 @@ app.get("/problem/:id", async (req, res) => {
   }
 });
 
-
-
-
-
-
-
 app.get("/submissions/:problemId", auth, (req, res) => {
   const id = req.params.id;
   const submissions = SUBMISSIONS.filter(
@@ -260,12 +250,9 @@ app.get("/submissions/:problemId", auth, (req, res) => {
   });
 });
 
-
-
 app.post("/submission", auth, (req, res) => {
   const isCorrect = Math.random() < 0.5;
   const id = req.body.id;
- 
 
   if (isCorrect) {
     SUBMISSIONS.push({
@@ -279,7 +266,6 @@ app.post("/submission", auth, (req, res) => {
     });
   } else {
     SUBMISSIONS.push({
-     
       id,
       userId: req.userId,
       status: "WA",
@@ -292,9 +278,6 @@ app.post("/submission", auth, (req, res) => {
 
 app.post("/signup", async (req, res) => {
   const { email, password } = req.body;
-  
-
-  
 
   try {
     let existingUser = await User.findOne({ email: email });
@@ -306,7 +289,6 @@ app.post("/signup", async (req, res) => {
     }
 
     const createdUser = new User({
-
       email,
       password,
     });
@@ -320,7 +302,6 @@ app.post("/signup", async (req, res) => {
   }
 });
 
-
 app.post("/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -329,9 +310,7 @@ app.post("/login", async (req, res) => {
     const existingUser = await User.findOne({ email: email });
 
     if (!existingUser) {
-      return res
-        .status(403)
-        .json({ msg: false });
+      return res.status(403).json({ msg: false });
     }
 
     if (existingUser.password === password) {
@@ -340,14 +319,12 @@ app.post("/login", async (req, res) => {
         {
           id: existingUser.id,
         },
-        JWT_SECRET
+        process.env.JWT_KEY
       );
 
       return res.status(200).json({ msg: true });
     } else {
-      return res
-        .status(403)
-        .json({ msg: false });
+      return res.status(403).json({ msg: false });
     }
   } catch (err) {
     console.error(err);
@@ -357,11 +334,9 @@ app.post("/login", async (req, res) => {
   }
 });
 
-
-
 mongoose
   .connect(
-    "mongodb+srv://j966433:DkW0PAAMdDgARo13@users.lp1sjwp.mongodb.net/user?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@users.lp1sjwp.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
   .then(() => {
     app.listen(port, () => {

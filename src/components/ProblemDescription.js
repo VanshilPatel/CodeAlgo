@@ -13,7 +13,7 @@ const ProblemDescription = () => {
   
 
   const init = async () => {
-    const response = await fetch(`http://localhost:3000/problem/${pid}` , {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/problem/${pid}` , {
       method: "GET",
     });
 
@@ -36,15 +36,15 @@ const ProblemDescription = () => {
       
      
 
-    {problem && problem.difficulty === "easy" ? (
-  <Button mt={3} ml={3} size="xs" colorScheme="green">
-    {problem && problem.difficulty}
-  </Button>
-) : (
-  <Button mt={3} ml={3} size="xs" colorScheme="orange">
-    {problem && problem.difficulty}
-  </Button>
-)}
+      <Button mt={3} ml={3} size="xs" colorScheme={
+        problem.difficulty === "Easy"
+          ? "green"
+          : problem.difficulty === "Medium"
+            ? "yellow"
+            : "red"
+      }>
+        {problem && problem.difficulty}
+      </Button>
 
 
 

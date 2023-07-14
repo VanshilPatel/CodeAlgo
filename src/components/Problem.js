@@ -43,7 +43,7 @@ const Submissions = () => {
       "id": "1",
       "code": `class Solution {
         public:
-            vector<int> twoSum(vector<int>& nums, int target) {
+            vector<int> solution(vector<int>& nums, int target) {
 
             }
         };`
@@ -55,14 +55,14 @@ const Submissions = () => {
       * @param {number} target
       * @return {number[]}
       */
-     var twoSum = function(nums, target) {
+     var solution = function(nums, target) {
          
      };`
     },
     {
       "id": "3",
       "code": `class Solution(object):
-      def twoSum(self, nums, target):
+      def solution(self, nums, target):
           """
           :type nums: List[int]
           :type target: int
@@ -72,7 +72,7 @@ const Submissions = () => {
     {
       "id": "4",
       "code": `class Solution {
-        public int[] twoSum(int[] nums, int target) {
+        public int[] solution(int[] nums, int target) {
             
         }
     }`
@@ -80,7 +80,7 @@ const Submissions = () => {
     {
       "id": "5",
       "code": `public class Solution {
-        public int[] TwoSum(int[] nums, int target) {
+        public int[] solution(int[] nums, int target) {
             
         }
     }`
@@ -88,7 +88,7 @@ const Submissions = () => {
     {
       "id": "6",
       "code": `class Solution {
-        func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        func solution(_ nums: [Int], _ target: Int) -> [Int] {
             
         }
     }`

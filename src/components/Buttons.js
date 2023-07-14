@@ -7,9 +7,17 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
+  ModalHeader,
+  ModalCloseButton,
   ModalBody,
+  VStack
 } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
+import Tick from "../utils/tick.json";
+import Cross from "../utils/cross.json";
+import Lottie from "lottie-react";
+import Compile  from "../utils/compile.json";
+
 
 
 
@@ -20,6 +28,11 @@ const Buttons = () => {
   // const [submit , setSubmit ] = useState(false);
   const navigate = useNavigate();
   const [status, setStatus] = useState('');
+
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const handleSubmit = () => {
+    setShowSubmitModal(true);
+  }
   
   // const [submit , setSubmit] = useState(false);
   // const submitClick = () =>{
@@ -36,14 +49,15 @@ const Buttons = () => {
     
     setTimeout(() => {
       setShowModal(false);
-    }, 1200);
+    }, 8000);
   };
 
   return (
     <div>
       <Flex mt={3} ml={"96"}>
         <Button
-          colorScheme="yellow"
+          colorScheme="orange"
+          bg={'orange.500'}
           size="md"
           ml={24}
           href="#"
@@ -57,64 +71,76 @@ const Buttons = () => {
           isCentered
         >
           <ModalOverlay />
-          <ModalContent width={"250px"} height={"250px"}>
+          <ModalContent width={"250px"} height={"280px"}>
             {/* <ModalCloseButton /> */}
             <ModalBody
               display="flex"
               alignItems="center"
               justifyContent="center"
             >
-              <div className="spinner">
-                <Spinner
-                  thickness="4px"
-                  speed="0.65s"
-                  emptyColor="gray.200"
-                  color="blue.500"
-                  size="xl"
-                />
-               
-                <div className="spinner-animation"></div>
-              </div>
-              <div> Compiling....</div>
+              <VStack spacing={"2"}>
+              <Lottie animationData={Compile} loop={false}/>
+              <div style ={{fontSize : '1.5rem' , fontWeight:'bold'}}> Compiling....</div>
+              </VStack>
+             
             </ModalBody>
            
           </ModalContent>
         </Modal>
         {showModal && <div className="backdrop"></div>}
-        <Button colorScheme="green" size="md" ml={5}  
-        onClick={async () => {
-                  const response = await fetch(`http://localhost:3000/submission`, {
-                    method: "POST",
-                    headers: {
+        <Modal isOpen={showSubmitModal} onClose={() => setShowSubmitModal(false)} isCentered>
+          <ModalOverlay />
+          <ModalContent width={"250px"} height={"250px"}>
+            <ModalHeader>Problem Status</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody display="flex"
+              alignItems="center"
+              justifyContent="center">
+              {/* <p>Meet</p> */}
+
+              {status === 'AC' ? (
+                <VStack>
+                <div style ={{width:'6rem'}}><Lottie animationData={Tick} loop={false}/></div>
+                
+                <p style ={{fontSize : '1.5rem' , fontWeight:'bold'}}>Accepted</p>
+                </VStack>
+                
+              ) : status === 'WA' ? (
+                <VStack>
+                <div style ={{width:'6rem'}}><Lottie animationData={Cross} loop={false}/></div>
+                
+                <p style ={{fontSize : '1.5rem' , fontWeight:'bold'}}>Rejected</p>
+                </VStack>
+              ) : null}
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+        
+                <Button colorScheme="green" size="md" ml={5}
+          onClick={async () => {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/submission`, {
+              method: "POST",
+              
+               headers: {
                       "authorization": localStorage.getItem("token")
                     },
-                    body: JSON.stringify({
-                      problemId: pid,
-                      //useremail : email
-                    })
-                  });
+              body: JSON.stringify({
+                problemId: pid,
+               
+              })
+            });
 
-                  const json = await response.json();
-                  console.log(json);
-                
-                  navigate('/submission');
-                  setStatus(json.status);
-                }}
-                >
+            setShowSubmitModal(true);
+            const json = await response.json();
+            setStatus(json.status);
+            console.log(json);
+            navigate('/submission');
+
+          }}
+        >
           Submit
         </Button>
-        {/* {status === 'AC' ? <p>Accepted</p> : status === 'WA' ? <p>Rejected</p> : null} */}
-        {status === 'AC' ? (
-        <div className="status-container accepted">
-          <div className="symbol">&#x2713;</div>
-          <p className="status-text">Accepted</p>
-        </div>
-      ) : status === 'WA' ? (
-        <div className="status-container rejected">
-          <div className="symbol">&#x2717;</div>
-          <p className="status-text">Rejected</p>
-        </div>
-      ) : null}
+        
       </Flex>
     </div>
   );

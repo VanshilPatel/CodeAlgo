@@ -45,7 +45,7 @@ function Tablediv() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/problems');
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/problems`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -175,7 +175,7 @@ function Tablediv() {
             </HStack>
           </HStack>
         </VStack>
-        <VStack bg={'gray.700'} borderRadius={5} w="18rem" h="18rem" mr={8} mt={20} display="flex" alignItems="center" justifyContent="center">
+        <VStack bg={'whiteAlpha.500'} borderRadius={5} w="18rem" h="18rem" mr={8} mt={20} display="flex" alignItems="center" justifyContent="center">
           <Text fontSize="25px" fontWeight="bold" mb={4}>Current Streak: 1🔥</Text>
           <VStack border="2px" borderColor={'gray.800'} w="10rem" h="10rem" borderRadius="100%" display="flex" alignItems="center" justifyContent="center">
             {
@@ -188,7 +188,7 @@ function Tablediv() {
             <Text fontSize="25px" fontWeight="bold">{solved}</Text>
             <Divider w={20} />
             <Text fontSize="25px" fontWeight="bold">{Data.length}</Text>
-            <Text fontSize="20px" color="gray.300">Solved</Text>
+            <Text fontSize="20px" color="blackAlpha.600">Solved</Text>
           </VStack>
         </VStack>
       </HStack>
@@ -197,3 +197,4 @@ function Tablediv() {
 }
 
 export default Tablediv;
+

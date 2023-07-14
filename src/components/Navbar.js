@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-import logoimg from "../components/logo/logo1.png"
+import logoimg from "../components/logo2.png"
 
 const Navbar = () => {
   return (
@@ -24,7 +24,7 @@ const Navbar = () => {
           <HStack spacing={"36"} alignItems={"center"}>
             <Box fontWeight={"semibold"}>
               {" "}
-              <NavLink to={"/"}>
+              <NavLink to={"/home"}>
                 {" "}
                 <Image src={logoimg} alt="Dan Abramov" />
               </NavLink>
@@ -36,7 +36,7 @@ const Navbar = () => {
             >
               <NavLink to={"/home"}>Problems</NavLink>
               <NavLink to={"/discuss"}>Discuss</NavLink>
-              <NavLink color="yellow" to={"/premium"}>
+              <NavLink style={{ color: "#FFA116" }} to={"/premium"}>
                 Premium
               </NavLink>
             </HStack>
@@ -53,10 +53,10 @@ const Navbar = () => {
                 fontSize={"sm"}
                 fontWeight={600}
                 color={"white"}
-                bg={"green.500"}
-                href={"/signup"}
+                bg={"orange.500"}
+                href={"/"}
                 _hover={{
-                  bg: "green.300",
+                  bg: "orange.400",
                 }}
               >
                 Sign Up
@@ -68,7 +68,7 @@ const Navbar = () => {
                 fontSize={"sm"}
                 fontWeight={600}
                 color={"white"}
-                bg={"blue.600"}
+                bg={"deepskyblue"}
                 href={"/login"}
                 _hover={{
                   bg: "blue.400",

@@ -1,4 +1,4 @@
-const JWT_SECRET = "secret";
+
 var jwt = require('jsonwebtoken');
 
 
@@ -8,7 +8,7 @@ module.exports = {
         if (!authHeader) {
             return res.status(403).json({msg: "Missing auth header"});
         }
-        const decoded = jwt.verify(authHeader, JWT_SECRET);
+        const decoded = jwt.verify(authHeader, process.env.JWT_KEY);
         if (decoded && decoded.id) {
             req.userId = decoded.id;
             next()
