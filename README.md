@@ -21,10 +21,10 @@ Live Link : https://codealgo.netlify.app/
 
 
 ## Screenshots
-![Home](src/utils/homepage.png)
-![Problem](src/utils/problem.png)
-![Premium](src/utils/premium.png)
-![Blog](src/utils/blog.png)
+![Home](src/Assets/homepage.png)
+![Problem](src/Assets/problem.png)
+![Premium](src/Assets/premium.png)
+![Blog](src/Assets/blog.png)
 
 
 
