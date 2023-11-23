@@ -118,17 +118,20 @@ const Buttons = () => {
         
                 <Button colorScheme="green" size="md" ml={5}
           onClick={async () => {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/submission`, {
-              method: "POST",
-              
-               headers: {
-                      "authorization": localStorage.getItem("token")
-                    },
-              body: JSON.stringify({
-                problemId: pid,
-               
-              })
-            });
+            const submission = {
+  problemId: pid,
+};
+
+const jsonSubmission = JSON.stringify(submission);
+
+const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/submission`, {
+  method: "POST",
+  headers: {
+    "Authorization": localStorage.getItem("token"),
+    "Content-Type": "application/json",
+  },
+  body: jsonSubmission,
+});
 
             setShowSubmitModal(true);
             const json = await response.json();

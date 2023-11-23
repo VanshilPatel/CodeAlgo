@@ -28,10 +28,10 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<SignUp />} />
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
-          {/* <Route path="/signup" element={<SignUp />} /> */}
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/discuss" element={<Discuss />} />
           <Route path="/problem/:id" element={<Problem />} />
           <Route path="/submission" element={<Problem />} />

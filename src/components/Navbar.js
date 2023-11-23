@@ -54,7 +54,7 @@ const Navbar = () => {
                 fontWeight={600}
                 color={"white"}
                 bg={"orange.500"}
-                href={"/"}
+                href={"/signup"}
                 _hover={{
                   bg: "orange.400",
                 }}
